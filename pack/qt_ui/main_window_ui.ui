@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>707</width>
+    <height>424</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>烤红薯</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>**正在操作**</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::MarkdownText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="currentName">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>--------</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::AutoText</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="toggleStateButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>暂停</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="terminalButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>终止</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="delete_unit_btn">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>删除</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="tabBrowser">
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+      <property name="documentMode">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="clearLogButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>清空日志</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>707</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="defaultUp">
+    <bool>false</bool>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>true</bool>
+   </property>
+   <widget class="QMenu" name="menu_S">
+    <property name="title">
+     <string>设置(S)</string>
+    </property>
+    <widget class="QMenu" name="menu_save_config">
+     <property name="title">
+      <string>保存配置</string>
+     </property>
+     <addaction name="action_auto_rename"/>
+    </widget>
+    <addaction name="action_set_debug"/>
+    <addaction name="separator"/>
+    <addaction name="action_set_browser_path"/>
+    <addaction name="action_set_cookies"/>
+    <addaction name="action_add_linked_user"/>
+    <addaction name="action_check_note"/>
+    <addaction name="separator"/>
+    <addaction name="menu_save_config"/>
+    <addaction name="action_config_template"/>
+   </widget>
+   <widget class="QMenu" name="menu_H">
+    <property name="title">
+     <string>帮助(H)</string>
+    </property>
+    <addaction name="action_user_protocol"/>
+    <addaction name="action_about_software"/>
+   </widget>
+   <widget class="QMenu" name="menu_F">
+    <property name="title">
+     <string>文件(F)</string>
+    </property>
+    <widget class="QMenu" name="menu_save_log">
+     <property name="title">
+      <string>保存日志</string>
+     </property>
+     <addaction name="action_save_cur"/>
+     <addaction name="action_save_all"/>
+    </widget>
+    <addaction name="menu_save_log"/>
+    <addaction name="separator"/>
+    <addaction name="action_backup_config"/>
+    <addaction name="action_resotre_config"/>
+   </widget>
+   <widget class="QMenu" name="menu_M">
+    <property name="title">
+     <string>管理(M)</string>
+    </property>
+    <addaction name="action_create_unit"/>
+    <addaction name="separator"/>
+    <addaction name="action_config_manage"/>
+    <addaction name="action_create_config"/>
+    <addaction name="separator"/>
+    <addaction name="action_user_manage"/>
+    <addaction name="action_at_user_manage"/>
+   </widget>
+   <widget class="QMenu" name="menu_E">
+    <property name="title">
+     <string>编辑(E)</string>
+    </property>
+    <widget class="QMenu" name="menu_basic_operate">
+     <property name="title">
+      <string>基本操作</string>
+     </property>
+     <addaction name="action_pause"/>
+     <addaction name="action_terminal"/>
+     <addaction name="action_delete"/>
+    </widget>
+    <addaction name="menu_basic_operate"/>
+    <addaction name="action_stage_manage"/>
+    <addaction name="action_note_manage"/>
+   </widget>
+   <addaction name="menu_M"/>
+   <addaction name="menu_E"/>
+   <addaction name="menu_F"/>
+   <addaction name="menu_S"/>
+   <addaction name="menu_H"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_create_unit">
+   <property name="text">
+    <string>创建单元</string>
+   </property>
+  </action>
+  <action name="action_user_manage">
+   <property name="text">
+    <string>用户管理</string>
+   </property>
+  </action>
+  <action name="action_pause">
+   <property name="text">
+    <string>暂停</string>
+   </property>
+  </action>
+  <action name="action_terminal">
+   <property name="text">
+    <string>终止</string>
+   </property>
+  </action>
+  <action name="action_delete">
+   <property name="text">
+    <string>删除</string>
+   </property>
+  </action>
+  <action name="action_edit_config">
+   <property name="text">
+    <string>修改配置</string>
+   </property>
+  </action>
+  <action name="action_note_manage">
+   <property name="text">
+    <string>笔记列表</string>
+   </property>
+  </action>
+  <action name="action_save_cur">
+   <property name="text">
+    <string>当前单元</string>
+   </property>
+  </action>
+  <action name="action_save_all">
+   <property name="text">
+    <string>所有单元</string>
+   </property>
+  </action>
+  <action name="action_check_update">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>检查更新</string>
+   </property>
+  </action>
+  <action name="action_config_template">
+   <property name="text">
+    <string>编辑配置模板</string>
+   </property>
+  </action>
+  <action name="action_config_manage">
+   <property name="text">
+    <string>配置管理</string>
+   </property>
+  </action>
+  <action name="action_create_config">
+   <property name="text">
+    <string>添加配置</string>
+   </property>
+  </action>
+  <action name="action_stage_manage">
+   <property name="text">
+    <string>阶段管理</string>
+   </property>
+  </action>
+  <action name="action_set_debug">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>调试模式</string>
+   </property>
+  </action>
+  <action name="action_user_protocol">
+   <property name="text">
+    <string>用户协议</string>
+   </property>
+  </action>
+  <action name="action_at_user_manage">
+   <property name="text">
+    <string>艾特用户</string>
+   </property>
+  </action>
+
+  <action name="action_add_linked_user">
+   <property name="text">
+    <string>联动账号</string>
+   </property>
+  </action>
+  <action name="action_check_note">
+   <property name="text">
+    <string>检测笔记</string>
+   </property>
+  </action>
+  <action name="action_auto_rename">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>自动智能命名</string>
+   </property>
+  </action>
+  <action name="action_about_software">
+   <property name="text">
+    <string>关于软件</string>
+   </property>
+  </action>
+  <action name="action_set_cookies">
+   <property name="text">
+    <string>设置CK</string>
+   </property>
+  </action>
+  <action name="action_backup_config">
+   <property name="text">
+    <string>备份配置</string>
+   </property>
+  </action>
+  <action name="action_resotre_config">
+   <property name="text">
+    <string>恢复配置</string>
+   </property>
+  </action>
+  <action name="action_set_browser_path">
+   <property name="text">
+    <string>设置浏览器</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

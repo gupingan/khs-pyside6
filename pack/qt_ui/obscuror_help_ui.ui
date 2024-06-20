@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>obscurorHelpRoot</class>
+ <widget class="QWidget" name="obscurorHelpRoot">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>612</width>
+    <height>344</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>生僻字引擎帮助</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTextBrowser" name="textBrowser">
+     <property name="html">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Inter'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-weight:696;&quot;&gt;1 何为生僻字引擎？&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI';&quot;&gt;用于自动化评论和留言等行为需要辅助的引擎，旨在通过在文本中添加一些限制，有效防止被相关平台识别为机器爬虫行为。&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI';&quot;&gt;注意：因为国内政策原因，需要屏蔽一些词，因此你可能看到**这样的字符。这是启用了该模块的 shield 参数的原因，不支持用户修改。&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI';&quot;&gt;该模块的 GitHub 仓库地址你可以&lt;/span&gt;&lt;a href=&quot;https://github.com/gupingan/gpa-obscuror&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; text-decoration: underline; color:#007af4;&quot;&gt;点击这里前往预览&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI';&quot;&gt;。&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Microsoft YaHei UI'; font-size:11pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-weight:696;&quot;&gt;2 不同的模式有什么区别？&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt;&quot;&gt;原文：&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic; text-decoration: underline;&quot;&gt;惊了，你怎么知道我有三国演义的全集？&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt;&quot;&gt;以下我们将指定生僻字数量为 &lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-weight:696; color:#00ffff;&quot;&gt;3&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt;&quot;&gt;。&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-weight:696;&quot;&gt;append&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt;&quot;&gt;：&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic;&quot;&gt;惊了，你怎么知道我有三国演义的全集？&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic; color:#ff0000;&quot;&gt;庲醼哟&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-weight:696;&quot;&gt;unison&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt;&quot;&gt;：&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic;&quot;&gt;惊了，你怎么&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic; color:#ff0000;&quot;&gt;庢&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic;&quot;&gt;道我有三国&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic; color:#ff0000;&quot;&gt;鷃冝&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic;&quot;&gt;的全集？&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-weight:696;&quot;&gt;non-cn&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt;&quot;&gt;：&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic;&quot;&gt;惊&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic; color:#ff0000;&quot;&gt;le&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic;&quot;&gt;，你&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic; color:#ff0000;&quot;&gt;zěnme&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic;&quot;&gt;知道我有三国演义的全集？&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-weight:696;&quot;&gt;insert&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt;&quot;&gt;：&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic;&quot;&gt;惊了，你怎么知道我有三&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic; color:#ff0000;&quot;&gt;坏&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic;&quot;&gt;国演&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic; color:#ff0000;&quot;&gt;撄&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic;&quot;&gt;义的全&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic; color:#ff0000;&quot;&gt;疠&lt;/span&gt;&lt;span style=&quot; font-family:'Microsoft YaHei UI'; font-size:11pt; font-style:italic;&quot;&gt;集？&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

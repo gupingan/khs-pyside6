@@ -1,0 +1,32 @@
+[tool.poetry]
+package-mode = false
+name = "khs-pyqt-full"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.13"
+pyside6 = "6.6.3"
+loguru = "0.7.2"
+requests = "2.31.0"
+wmi = "1.5.1"
+gpa-obscuror = {path = "pack/packages/gpa_obscuror-1.1.0-py3-none-any.whl"}
+pyinstaller = "6.5.0"
+xhsapi = {path = "pack/packages/xhsapi-4.1.4-py3-none-any.whl"}
+pyee = "^11.1.0"
+toml = "^0.10.2"
+pyppeteer = "^2.0.0"
+pywin32 = "^306"
+qrcode = "7.4.2"
+
+[[tool.poetry.source]]
+name = "tencent-pypi"
+url = "http://mirrors.cloud.tencent.com/pypi/simple/"
+priority = "primary"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
