@@ -8,9 +8,9 @@
 
 ### 界面
 
-![截图_20240620182706](D:\python-projects\khs-pyside6\README.assets\截图_20240620182706.png)
+![截图_20240620182706](./README.assets/截图_20240620182706.png)
 
-![截图_20240620190030](D:\python-projects\khs-pyside6\README.assets\截图_20240620190030.png)
+![截图_20240620190030](./README.assets/截图_20240620190030.png)
 
 ### 部署和运行
 
