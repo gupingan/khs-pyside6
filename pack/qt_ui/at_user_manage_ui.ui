@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>518</width>
-    <height>338</height>
+    <width>640</width>
+    <height>423</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,6 +41,13 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="get_info_btn">
+       <property name="text">
+        <string>获取信息</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="create_at_user_btn">

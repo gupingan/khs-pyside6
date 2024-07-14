@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 
 ################################################################################
 ## Form generated from reading UI file 'edit_at_user_ui.ui'
@@ -23,12 +22,18 @@ class Ui_EditAtUser(object):
     def setupUi(self, EditAtUser):
         if not EditAtUser.objectName():
             EditAtUser.setObjectName(u"EditAtUser")
-        EditAtUser.resize(343, 205)
+        EditAtUser.resize(343, 149)
         self.verticalLayout = QVBoxLayout(EditAtUser)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
         self.formLayout.setVerticalSpacing(4)
+        self.label_3 = QLabel(EditAtUser)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setTextFormat(Qt.MarkdownText)
+
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_3)
+
         self.edit_user_id = QLineEdit(EditAtUser)
         self.edit_user_id.setObjectName(u"edit_user_id")
         self.edit_user_id.setMaxLength(40)
@@ -48,6 +53,12 @@ class Ui_EditAtUser(object):
 
         self.formLayout.setWidget(2, QFormLayout.FieldRole, self.edit_remark)
 
+        self.label_2 = QLabel(EditAtUser)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setTextFormat(Qt.MarkdownText)
+
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_2)
+
         self.edit_nickname = QLineEdit(EditAtUser)
         self.edit_nickname.setObjectName(u"edit_nickname")
         self.edit_nickname.setMaxLength(40)
@@ -55,18 +66,6 @@ class Ui_EditAtUser(object):
         self.edit_nickname.setEchoMode(QLineEdit.Normal)
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.edit_nickname)
-
-        self.label_2 = QLabel(EditAtUser)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setTextFormat(Qt.MarkdownText)
-
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_2)
-
-        self.label_3 = QLabel(EditAtUser)
-        self.label_3.setObjectName(u"label_3")
-        self.label_3.setTextFormat(Qt.MarkdownText)
-
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_3)
 
 
         self.verticalLayout.addLayout(self.formLayout)
@@ -103,9 +102,9 @@ class Ui_EditAtUser(object):
 
     def retranslateUi(self, EditAtUser):
         EditAtUser.setWindowTitle(QCoreApplication.translate("EditAtUser", u"\u7f16\u8f91\u827e\u7279\u7528\u6237", None))
+        self.label_3.setText(QCoreApplication.translate("EditAtUser", u"**\u7528\u6237ID**", None))
         self.label_6.setText(QCoreApplication.translate("EditAtUser", u"**\u5907\u6ce8**", None))
         self.label_2.setText(QCoreApplication.translate("EditAtUser", u"**\u6635\u79f0**", None))
-        self.label_3.setText(QCoreApplication.translate("EditAtUser", u"**\u7528\u6237ID**", None))
         self.cancel_button.setText(QCoreApplication.translate("EditAtUser", u"\u53d6\u6d88", None))
         self.save_button.setText(QCoreApplication.translate("EditAtUser", u"\u4fdd\u5b58", None))
     # retranslateUi

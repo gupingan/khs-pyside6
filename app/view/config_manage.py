@@ -248,7 +248,16 @@ class ConfigManage(QtWidgets.QDialog):
                     else QtCore.Qt.CheckState.Checked
                 )
                 self.config_table_model.setData(index, new_check_state, QtCore.Qt.ItemDataRole.CheckStateRole)
-                self.ui.select_config_number.setText(f'{len(self.get_selected_rows())}个')
+
+                select_number = len(self.get_selected_rows())
+                self.ui.select_config_number.setText(f'{select_number}个')
+
+                if select_number == self.config_table_model.rowCount():
+                    self.ui.toggle_select_btn.setText('取消全选')
+                    self.select_all = True
+                else:
+                    self.ui.toggle_select_btn.setText('全选')
+                    self.select_all = False
 
     def handle_config_table_item_dbclick(self, index: QtCore.QModelIndex):
         """

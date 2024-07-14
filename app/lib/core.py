@@ -206,24 +206,26 @@ class PrivateUser(User):
 
 
 class AtUser(User):
-    def __init__(self, user_id: Union[str], nickname: Union[str], remark: Union[str] = ''):
+    def __init__(self, user_id: Union[str], nickname: Union[str], remark: Union[str] = '', sign: Union[str] = ''):
         super().__init__(user_id, nickname)
         self.remark = remark
+        self.sign = sign
 
     @classmethod
     def from_dict(cls, data: Dict):
         uid = data.get('id')
         name = data.get('name')
         remark = data.get('remark')
-        if cls.all_not_none(uid, name, remark):
-            return cls(uid, name, remark)
+        sign = data.get('sign', '')
+        if cls.all_not_none(uid, name, remark, sign):
+            return cls(uid, name, remark, sign)
         return None
 
     @property
     def results(self):
         return {
-            'nickname': self.name,
-            'user_id': self.id
+            'nickname': f'{self.name}',
+            'user_id': f'{self.id}_{self.sign}' if self.sign else self.id
         }
 
 

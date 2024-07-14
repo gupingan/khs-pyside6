@@ -12,8 +12,8 @@ settings = QtCore.QSettings('gupingan', 'KHS-Open')
 
 app_name = '烤红薯开源版'
 app_name_en = 'KHS-Open'
-version_number = 1
-version_name = '1.0.0'
+version_number = 2
+version_name = '1.1.0'
 
 COMMON_CHARS = {
     '换行符': '\\n',
@@ -114,7 +114,7 @@ class CellStates:
         1: CellState('有效', '#008000')
     }
     COMMENT_STATES = {
-        -2: CellState('禁言', 'red'),
+        -2: CellState('禁言/封号', 'red'),
         -1: CellState('未知', '#FFA500'),
         0: CellState('屏蔽', '#800080'),
         1: CellState('正常', '#008000')

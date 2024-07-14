@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>343</width>
-    <height>205</height>
+    <height>149</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,6 +19,16 @@
      <property name="verticalSpacing">
       <number>4</number>
      </property>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>**用户ID**</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::MarkdownText</enum>
+       </property>
+      </widget>
+     </item>
      <item row="1" column="1">
       <widget class="QLineEdit" name="edit_user_id">
        <property name="maxLength">
@@ -45,19 +55,6 @@
      <item row="2" column="1">
       <widget class="QTextEdit" name="edit_remark"/>
      </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="edit_nickname">
-       <property name="maxLength">
-        <number>40</number>
-       </property>
-       <property name="frame">
-        <bool>true</bool>
-       </property>
-       <property name="echoMode">
-        <enum>QLineEdit::Normal</enum>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
@@ -68,13 +65,16 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>**用户ID**</string>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="edit_nickname">
+       <property name="maxLength">
+        <number>40</number>
        </property>
-       <property name="textFormat">
-        <enum>Qt::MarkdownText</enum>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Normal</enum>
        </property>
       </widget>
      </item>

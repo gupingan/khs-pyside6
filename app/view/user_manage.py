@@ -349,6 +349,8 @@ class UserManage(QtWidgets.QDialog):
                 else:
                     if response['code'] == 10001:
                         comment_schema.user.comment_state = -2
+                    elif response['code'] == -10000:
+                        comment_schema.user.comment_state = -2
                     elif response['code'] == -100:
                         comment_schema.user.available = 0
         except Exception as e:
@@ -488,7 +490,15 @@ class UserManage(QtWidgets.QDialog):
                         else QtCore.Qt.CheckState.Checked
                     )
                     self.private_user_table_model.setData(index, new_check_state, QtCore.Qt.ItemDataRole.CheckStateRole)
-                    self.ui.select_user_number.setText(f'{len(self.get_selected_rows())}个')
+                    select_number = len(self.get_selected_rows())
+                    self.ui.select_user_number.setText(f'{select_number}个')
+
+                    if select_number == self.private_user_table_model.rowCount():
+                        self.ui.toggle_select_btn.setText('取消全选')
+                        self.select_all = True
+                    else:
+                        self.ui.toggle_select_btn.setText('全选')
+                        self.select_all = False
 
     def handle_user_table_item_dbclick(self, index: QtCore.QModelIndex):
         """

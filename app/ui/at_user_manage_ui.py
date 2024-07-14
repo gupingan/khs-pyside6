@@ -23,7 +23,7 @@ class Ui_AtUserManage(object):
     def setupUi(self, AtUserManage):
         if not AtUserManage.objectName():
             AtUserManage.setObjectName(u"AtUserManage")
-        AtUserManage.resize(518, 338)
+        AtUserManage.resize(640, 423)
         self.verticalLayout = QVBoxLayout(AtUserManage)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.horizontalLayout = QHBoxLayout()
@@ -41,6 +41,11 @@ class Ui_AtUserManage(object):
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
+
+        self.get_info_btn = QPushButton(AtUserManage)
+        self.get_info_btn.setObjectName(u"get_info_btn")
+
+        self.horizontalLayout.addWidget(self.get_info_btn)
 
         self.create_at_user_btn = QPushButton(AtUserManage)
         self.create_at_user_btn.setObjectName(u"create_at_user_btn")
@@ -69,6 +74,7 @@ class Ui_AtUserManage(object):
     def retranslateUi(self, AtUserManage):
         AtUserManage.setWindowTitle(QCoreApplication.translate("AtUserManage", u"\u7ba1\u7406 - \u827e\u7279\u7528\u6237\u7ba1\u7406", None))
         self.toggle_select_btn.setText(QCoreApplication.translate("AtUserManage", u"\u5168\u9009", None))
+        self.get_info_btn.setText(QCoreApplication.translate("AtUserManage", u"\u83b7\u53d6\u4fe1\u606f", None))
         self.create_at_user_btn.setText(QCoreApplication.translate("AtUserManage", u"\u6dfb\u52a0", None))
         self.delete_at_user_btn.setText(QCoreApplication.translate("AtUserManage", u"\u5220\u9664", None))
     # retranslateUi

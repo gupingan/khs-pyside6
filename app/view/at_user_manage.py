@@ -1,5 +1,8 @@
+import xhsAPI
+from loguru import logger
 from app.lib import QtCore, QtWidgets, QtGui
-from app.lib.core import AtUser, AtUserCenter, List
+from app.lib.core import AtUser, AtUserCenter, List, LinkedUser
+from app.utils.network import NetworkPool
 from app.ui import at_user_manage_ui
 from app.view import edit_at_user
 
@@ -20,7 +23,7 @@ class AtUserTableModel(QtCore.QAbstractTableModel):
         super().__init__()
         self.proxy = [AtUserProxy(a) for a in data]
         self.checked_rows = []
-        self.header = ['昵称', '用户ID', '备注']
+        self.header = ['昵称', '用户ID', '签名', '备注']
 
     def rowCount(self, parent=QtCore.QModelIndex()):
         return len(self.proxy)
@@ -44,6 +47,8 @@ class AtUserTableModel(QtCore.QAbstractTableModel):
                 elif col == 1:
                     return at_user.id
                 elif col == 2:
+                    return at_user.sign
+                elif col == 3:
                     return at_user.remark
             return None
 
@@ -115,6 +120,7 @@ class AtUserTableModel(QtCore.QAbstractTableModel):
 
 class AtUserManage(QtWidgets.QDialog):
     select_all = False
+    exist_sign_error = False
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
@@ -123,6 +129,7 @@ class AtUserManage(QtWidgets.QDialog):
         self.ui.setupUi(self)
         self.build_interface()
         self.connect_ui_events()
+        self.service_deployment()
 
     def build_interface(self):
         self.at_user_table_model = AtUserTableModel(AtUserCenter.data)
@@ -149,6 +156,12 @@ class AtUserManage(QtWidgets.QDialog):
         self.ui.tableView.clicked.connect(self.handle_at_user_table_item_click)
         self.ui.tableView.doubleClicked.connect(self.handle_at_user_table_item_dbclick)
         self.ui.tableView.entered.connect(self.on_at_user_table_entered)
+        self.ui.get_info_btn.clicked.connect(self.on_get_info_click)
+
+    def service_deployment(self):
+        self.get_info_thread = NetworkPool()
+        self.get_info_thread.set_max_thread(8)
+        self.get_info_thread.allTasksDone.connect(self.on_get_info_all_finished)
 
     def get_selected_rows(self):
         """
@@ -243,6 +256,14 @@ class AtUserManage(QtWidgets.QDialog):
                     else QtCore.Qt.CheckState.Checked
                 )
                 self.at_user_table_model.setData(index, new_check_state, QtCore.Qt.ItemDataRole.CheckStateRole)
+                select_number = len(self.get_selected_rows())
+
+                if select_number == self.at_user_table_model.rowCount():
+                    self.ui.toggle_select_btn.setText('取消全选')
+                    self.select_all = True
+                else:
+                    self.ui.toggle_select_btn.setText('全选')
+                    self.select_all = False
 
     def handle_at_user_table_item_dbclick(self, index: QtCore.QModelIndex):
         """
@@ -265,8 +286,56 @@ class AtUserManage(QtWidgets.QDialog):
         return wrapper
 
     def on_at_user_table_entered(self, index):
-        if index.isValid() and index.column() == 0:
+        if index.isValid() and index.column() in {0, 2, 3}:
             data = index.data(QtCore.Qt.ItemDataRole.DisplayRole)
             QtWidgets.QToolTip.showText(
                 self.ui.tableView.mapToGlobal(self.ui.tableView.visualRect(index).bottomRight()),
                 str(data))
+
+    def on_get_info_click(self):
+        selected_rows = self.get_selected_rows()
+        if selected_rows:
+            self.exist_sign_error = False
+            self.ui.get_info_btn.setEnabled(False)
+            for row in selected_rows:
+                start = self.at_user_table_model.index(row, 0)
+                end = self.at_user_table_model.index(row, 2)
+                at_user = AtUserCenter.find(row)
+                linked_user = LinkedUser.from_session()
+                signals = self.get_info_thread.start_task(
+                    xhsAPI.G(linked_user.string_cookies).search_at_users,
+                    at_user.id, 1, 1
+                )
+                signals.success.connect(self.on_get_info_success(at_user, start, end))
+
+        else:
+            QtWidgets.QMessageBox.warning(self, '操作失败', '你需要选择至少 1 名艾特用户才能进行获取', )
+
+    def on_get_info_success(self, at_user: AtUser, start: QtCore.QModelIndex, end: QtCore.QModelIndex):
+        def wrapper(response: dict):
+            try:
+                if not self.exist_sign_error:
+                    if response.get('success') and response['code'] == 0:
+                        if response['data'] and response['data']['items']:
+                            result = response['data']['items'][0]
+                            userid = result['userid']
+                            nickname = result['nickname']
+                            at_user.name = nickname
+                            userid_sign = userid.split('_', 1)
+                            at_user.sign = userid_sign[-1] if len(userid_sign) == 2 else ''
+                    elif response.get('code') == -100:
+                        self.exist_sign_error = True
+            except Exception as e:
+                logger.error('获取艾特用户信息失败，原因如下：')
+                logger.exception(e)
+            finally:
+                self.at_user_table_model.dataChanged.emit(start, end)
+
+        return wrapper
+
+    def on_get_info_all_finished(self):
+        AtUserCenter.save()
+        self.ui.get_info_btn.setEnabled(True)
+        if self.exist_sign_error:
+            QtWidgets.QMessageBox.critical(self, '获取艾特用户信息失败', '联动账号可能已经登录失效')
+        self.exist_sign_error = False
