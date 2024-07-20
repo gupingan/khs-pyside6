@@ -30,7 +30,11 @@ poetry install
 npm install jsdom  # 开发情况下请务必安装好 nodejs（作者开发时的版本：v20.11.1）
 ```
 
-开发情景下，可直接运行 `main.py` 入口文件，应用默认是单例运行，如需修改请自行查看 `app` 包的 `__init__.py` 文件。
+开发情景下：
+- Pycharm 中设置好 poetry 环境后，可直接运行 `main.py` 入口文件
+- 终端环境中运行，键入命令：`poetry run python main.py`
+
+应用默认是单例运行，如需修改请自行查看 `app` 包的 `__init__.py` 文件。
 
 如果你需要打包成 `exe` 可执行文件，请务必参考下方提示。
 
