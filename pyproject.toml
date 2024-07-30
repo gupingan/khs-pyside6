@@ -1,9 +1,9 @@
 [tool.poetry]
 package-mode = false
-name = "khs-pyqt-full"
+name = "khs-pyside6"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["Gu Pingan <g332920287@foxmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
