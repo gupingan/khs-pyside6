@@ -1,15 +1,15 @@
 from loguru import logger
 from app.lib import QtWidgets, QtCore
 from app.lib.core import Config, ConfigCenter, TomlBase
-from app.ui import edit_config_ui, obscuror_help_ui
+from app.ui import edit_config_ui
 from app.view import edit_comment
 
 
 class EditConfig(QtWidgets.QDialog):
     saved = QtCore.Signal(Config)
 
-    SPINBOX_MIN = [0, 0, 1, 0.00]
-    SPINBOX_MAX = [9, 9, 100, 1.00]
+    SPINBOX_MIN = [0, 1, 0.00]
+    SPINBOX_MAX = [9, 100, 1.00]
 
     def __init__(self, parent=None, config: Config = None, edit_type: str = 'new'):
         """
@@ -57,8 +57,7 @@ class EditConfig(QtWidgets.QDialog):
         if len(self.SPINBOX_MIN) != len(self.SPINBOX_MAX):
             raise ValueError("SPINBOX_MIN and SPINBOX_MAX must have the same length")
 
-        spin_boxes = [self.ui.uncommon_char_count_sb, self.ui.retry_count_sb, self.ui.retry_interval_ds,
-                      self.ui.similarity_lower_limit_dsb]
+        spin_boxes = [self.ui.retry_count_sb, self.ui.retry_interval_ds, self.ui.similarity_lower_limit_dsb]
 
         for spinbox, min_value, max_value in zip(spin_boxes, self.SPINBOX_MIN, self.SPINBOX_MAX):
             spinbox.setMinimum(min_value)
@@ -73,7 +72,6 @@ class EditConfig(QtWidgets.QDialog):
         self.collection_type_group.buttonClicked.connect(self.handle_toggle_collect_radio_click)
         self.ui.edit_comment_btn.clicked.connect(self.handle_edit_comment_click)
         self.ui.check_block_chk.toggled.connect(self.handle_check_block_toggle)
-        self.ui.uncommon_char_help_btn.clicked.connect(self.display_obscuror_help_dialog)
         self.ui.save_btn.clicked.connect(self.handle_save_btn_click)
         self.ui.cancel_btn.clicked.connect(self.close)
 
@@ -110,14 +108,7 @@ class EditConfig(QtWidgets.QDialog):
         self.ui.comment_chk.setChecked(self.config.is_comment)
         self.ui.fav_no_comment_chk.setChecked(self.config.is_fav_no_comment)
         self.ui.comment_fav_chk.setChecked(self.config.is_comment_fav)
-        self.set_combobox_item(self.ui.uncommon_char_mode_cb, self.config.uncommon_char_mode)
         self.comments = self.config.comments  # 评论列表
-        uncommon_char_count = self.config.uncommon_char_count
-        if uncommon_char_count > self.SPINBOX_MAX[0]:
-            uncommon_char_count = self.SPINBOX_MAX[0]
-        elif uncommon_char_count < self.SPINBOX_MIN[0]:
-            uncommon_char_count = self.SPINBOX_MIN[0]
-        self.ui.uncommon_char_count_sb.setValue(uncommon_char_count)
         # 屏蔽参数
         self.ui.linked_check_chk.setChecked(self.config.is_linked_check)
         self.ui.skip_over_comment_chk.setChecked(self.config.is_skip_over_comment)
@@ -167,8 +158,8 @@ class EditConfig(QtWidgets.QDialog):
             # 处理笔记类型
             note_type_map = {
                 '采集全部': '全部',
-                '采集图文': '图文',
-                '采集视频': '视频',
+                '仅采集图文': '图文',
+                '仅采集视频': '视频',
                 '先图文后视频': '图文和视频',
                 '先视频后图文': '视频和图文'
             }
@@ -239,8 +230,6 @@ class EditConfig(QtWidgets.QDialog):
             self.config.is_fav_no_comment = self.ui.fav_no_comment_chk.isChecked()
             self.config.is_comment_fav = self.ui.comment_fav_chk.isChecked()
             self.config.comments = self.comments
-            self.config.uncommon_char_mode = self.ui.uncommon_char_mode_cb.currentText()
-            self.config.uncommon_char_count = self.ui.uncommon_char_count_sb.value()
             # 屏蔽参数
             self.config.is_linked_check = self.ui.linked_check_chk.isChecked()
             self.config.is_skip_over_comment = self.ui.skip_over_comment_chk.isChecked()
@@ -278,8 +267,3 @@ class EditConfig(QtWidgets.QDialog):
 
     def set_current_comments(self, comments):
         self.comments = comments
-
-    def display_obscuror_help_dialog(self):
-        obscuror_help_dialog = QtWidgets.QDialog(parent=self)
-        obscuror_help_ui.Ui_obscurorHelpRoot().setupUi(obscuror_help_dialog)
-        obscuror_help_dialog.exec()

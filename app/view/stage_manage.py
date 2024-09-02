@@ -1,4 +1,4 @@
-from app.lib import QtCore, QtWidgets
+from app.lib import QtWidgets
 from app.lib.core import Unit, Tasker
 from app.ui import stage_manage_ui, tasker_item_ui
 from app.view import edit_config, note_manage

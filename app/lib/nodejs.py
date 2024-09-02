@@ -1,6 +1,7 @@
 import os
 import platform
-import xhsAPI
+import xhs
+from xhs.jsenv import default_node_runtime
 from abc import ABC, abstractmethod
 from pathlib import Path
 from loguru import logger
@@ -22,13 +23,9 @@ class WindowsX64Strategy(NodeJSStrategyABC):
         node_folder = self._get_node_folder(folder)
         if node_folder is not None:
             abs_folder = node_folder.resolve()
-            path_str = os.environ['Path'] + os.pathsep + str(abs_folder)
             existing_paths = os.environ['Path'].split(os.pathsep)
             if str(abs_folder) not in existing_paths:
-                os.environ['Path'] = path_str
-                if xhsAPI.unregister(xhsAPI.runtime_names.Node) and \
-                        xhsAPI.unregister(xhsAPI.runtime_names.JScript):
-                    xhsAPI.register(xhsAPI.runtime_names.Node, xhsAPI.external_runtime.node())
+                xhs.modify_node_runtime(abs_folder)
 
     @staticmethod
     def _get_node_folder(folder: Path):
@@ -59,6 +56,6 @@ class NodeJS:
         if architecture in self.supports.keys():
             _strategy = self.supports[architecture]
             _strategy.setup(folder)
-            logger.debug(f'环境 NodeJS 部署: {architecture} {xhsAPI.execjs.get()}')
+            logger.debug(f'环境 NodeJS 部署: {architecture} {default_node_runtime.is_available()}')
         else:
             raise OSError('Unsupported platform or architecture')

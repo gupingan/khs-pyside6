@@ -266,40 +266,6 @@ class Ui_EditConfig(object):
 
         self.horizontalLayout_17.addWidget(self.edit_comment_btn)
 
-        self.label_6 = QLabel(self.groupBox_5)
-        self.label_6.setObjectName(u"label_6")
-        sizePolicy.setHeightForWidth(self.label_6.sizePolicy().hasHeightForWidth())
-        self.label_6.setSizePolicy(sizePolicy)
-
-        self.horizontalLayout_17.addWidget(self.label_6)
-
-        self.uncommon_char_mode_cb = QComboBox(self.groupBox_5)
-        self.uncommon_char_mode_cb.addItem("")
-        self.uncommon_char_mode_cb.addItem("")
-        self.uncommon_char_mode_cb.addItem("")
-        self.uncommon_char_mode_cb.addItem("")
-        self.uncommon_char_mode_cb.setObjectName(u"uncommon_char_mode_cb")
-
-        self.horizontalLayout_17.addWidget(self.uncommon_char_mode_cb)
-
-        self.uncommon_char_help_btn = QToolButton(self.groupBox_5)
-        self.uncommon_char_help_btn.setObjectName(u"uncommon_char_help_btn")
-
-        self.horizontalLayout_17.addWidget(self.uncommon_char_help_btn)
-
-        self.label_13 = QLabel(self.groupBox_5)
-        self.label_13.setObjectName(u"label_13")
-        sizePolicy.setHeightForWidth(self.label_13.sizePolicy().hasHeightForWidth())
-        self.label_13.setSizePolicy(sizePolicy)
-
-        self.horizontalLayout_17.addWidget(self.label_13)
-
-        self.uncommon_char_count_sb = QSpinBox(self.groupBox_5)
-        self.uncommon_char_count_sb.setObjectName(u"uncommon_char_count_sb")
-        self.uncommon_char_count_sb.setMaximum(9)
-
-        self.horizontalLayout_17.addWidget(self.uncommon_char_count_sb)
-
 
         self.verticalLayout_6.addLayout(self.horizontalLayout_17)
 
@@ -509,15 +475,6 @@ class Ui_EditConfig(object):
         self.comment_fav_chk.setText(QCoreApplication.translate("EditConfig", u"\u8bc4\u8bba\u540e\u6536\u85cf", None))
         self.check_block_chk.setText(QCoreApplication.translate("EditConfig", u"\u662f\u5426\u68c0\u67e5\u5c4f\u853d", None))
         self.edit_comment_btn.setText(QCoreApplication.translate("EditConfig", u"\u7f16\u8f91\u8bc4\u8bba", None))
-        self.label_6.setText(QCoreApplication.translate("EditConfig", u"\u751f\u50fb\u5b57\u6a21\u5f0f", None))
-        self.uncommon_char_mode_cb.setItemText(0, QCoreApplication.translate("EditConfig", u"append", None))
-        self.uncommon_char_mode_cb.setItemText(1, QCoreApplication.translate("EditConfig", u"unison", None))
-        self.uncommon_char_mode_cb.setItemText(2, QCoreApplication.translate("EditConfig", u"non-cn", None))
-        self.uncommon_char_mode_cb.setItemText(3, QCoreApplication.translate("EditConfig", u"insert", None))
-
-        self.uncommon_char_help_btn.setText(QCoreApplication.translate("EditConfig", u"?", None))
-        self.label_13.setText(QCoreApplication.translate("EditConfig", u"\u751f\u50fb\u5b57\u6570\u91cf", None))
-        self.uncommon_char_count_sb.setSuffix(QCoreApplication.translate("EditConfig", u" \u4e2a", None))
         self.groupBox_6.setTitle(QCoreApplication.translate("EditConfig", u"\u5c4f\u853d\u53c2\u6570", None))
         self.linked_check_chk.setText(QCoreApplication.translate("EditConfig", u"\u8054\u52a8\u68c0\u67e5[\u52a0\u901f]", None))
         self.skip_over_comment_chk.setText(QCoreApplication.translate("EditConfig", u"\u8fc7\u591a\u8bc4\u8bba\u4e0d\u68c0\u67e5\u5c4f\u853d", None))

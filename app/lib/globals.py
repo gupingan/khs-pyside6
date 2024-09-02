@@ -12,8 +12,8 @@ settings = QtCore.QSettings('gupingan', 'KHS-Open')
 
 app_name = '烤红薯开源版'
 app_name_en = 'KHS-Open'
-version_number = 2
-version_name = '1.1.0'
+version_number = 3
+version_name = '1.2.0'
 
 COMMON_CHARS = {
     '换行符': '\\n',

@@ -1,4 +1,4 @@
-import xhsAPI
+import xhs
 from loguru import logger
 from app.lib import QtCore, QtWidgets, QtGui
 from app.lib.core import AtUser, AtUserCenter, List, LinkedUser
@@ -303,7 +303,7 @@ class AtUserManage(QtWidgets.QDialog):
                 at_user = AtUserCenter.find(row)
                 linked_user = LinkedUser.from_session()
                 signals = self.get_info_thread.start_task(
-                    xhsAPI.G(linked_user.string_cookies).search_at_users,
+                    xhs.API().set_cookies(linked_user.string_cookies).search_at_users,
                     at_user.id, 1, 1
                 )
                 signals.success.connect(self.on_get_info_success(at_user, start, end))

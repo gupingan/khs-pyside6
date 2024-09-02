@@ -3,7 +3,7 @@ import random
 import re
 import time
 import pathlib
-import xhsAPI
+import xhs
 from loguru import logger
 from app.lib import QtCore, QtWidgets, QtGui
 from app.lib.browser import startup_browser
@@ -256,7 +256,7 @@ class UserManage(QtWidgets.QDialog):
             user = PrivateUserCenter.find(row)
             index = self.private_user_table_model.index(row, 3)
             if user:
-                signals = self.check_login_thread.start_task(xhsAPI.G(user.string_cookies).user_me)
+                signals = self.check_login_thread.start_task(xhs.API().set_cookies(user.string_cookies).user_me)
                 signals.success.connect(self.on_check_login_success(user, index))
 
     def on_check_login_success(self, user: PrivateUser, index: QtCore.QModelIndex):
@@ -314,7 +314,7 @@ class UserManage(QtWidgets.QDialog):
                 "射手座", "摩羯座", "水瓶座", "双鱼座"
             ]
             comment_text = f'{random.choice(zodiac_signs)}{random.choice(range(7, 24))}岁'
-            signals = self.post_comment_thead.start_task(xhsAPI.P(user.string_cookies).post_comment, check_note_id,
+            signals = self.post_comment_thead.start_task(xhs.API().set_cookies(user.string_cookies).comment_post, check_note_id,
                                                          comment_text)
             comment_proxy = CommentProxy(user, index, check_note_id)
             signals.success.connect(self.on_post_comment_success(comment_proxy))
@@ -342,7 +342,7 @@ class UserManage(QtWidgets.QDialog):
 
                         comment_schema.user.comment_state = check_result
 
-                        xhsAPI.P(comment_schema.user.string_cookies).delete_comment(
+                        xhs.API().set_cookies(comment_schema.user.string_cookies).comment_delete(
                             comment_schema.note_id,
                             comment_schema.comment_id
                         )
@@ -369,7 +369,7 @@ class UserManage(QtWidgets.QDialog):
         self.ui.check_comment_btn.setEnabled(True)
 
     def recur_check_comment_state(self, user: PrivateUser, note_id: str, comment_id: str, cursor: str = ""):
-        response = xhsAPI.G(user.string_cookies).show_comments(note_id, cursor)
+        response = xhs.API().set_cookies(user.string_cookies).show_comments(note_id, cursor)
         if not response['success']:
             return -1
 

@@ -196,7 +196,6 @@ class NoteManage(QtWidgets.QDialog):
             clipboard = QtGui.QGuiApplication.clipboard()
             clipboard.setText(str(data))
 
-
     def handle_note_table_click(self, index: QtCore.QModelIndex):
         """
         处理 Note Table Cell 的单击事件
@@ -218,5 +217,6 @@ class NoteManage(QtWidgets.QDialog):
     def on_note_table_entered(self, index):
         if index.isValid() and index.column() == 0:
             data = index.data(QtCore.Qt.ItemDataRole.DisplayRole)
-            QtWidgets.QToolTip.showText(self.ui.table_notes.mapToGlobal(self.ui.table_notes.visualRect(index).bottomRight()),
-                                        str(data))
+            QtWidgets.QToolTip.showText(
+                self.ui.table_notes.mapToGlobal(self.ui.table_notes.visualRect(index).bottomRight()),
+                str(data))

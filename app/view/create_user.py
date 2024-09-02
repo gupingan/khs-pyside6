@@ -1,4 +1,4 @@
-import xhsAPI
+import xhs
 from loguru import logger
 from app.lib import QtCore, QtWidgets, QtGui
 from app.lib.factory import PrivateUser, LoginQrCode, PrivateUserCenter, PrivateUserFactory
@@ -51,7 +51,7 @@ class CreateUser(QtWidgets.QDialog):
     def handle_refresh_qrcode_click(self):
         self.reset_relative_parameters()
         self.ui.refresh_qrcode_btn.setEnabled(False)
-        create_qrcode_signals = self.network_pool.start_task(xhsAPI.P(self.factory.make_cookies()).create_qrcode)
+        create_qrcode_signals = self.network_pool.start_task(xhs.API().set_cookies(self.factory.make_cookies()).create_qrcode)
         create_qrcode_signals.success.connect(self.on_create_qrcode_success)
         create_qrcode_signals.finished.connect(lambda: self.ui.refresh_qrcode_btn.setEnabled(True))
 
@@ -79,7 +79,7 @@ class CreateUser(QtWidgets.QDialog):
         if self.login_qrcode:
             self.ui.check_button.setEnabled(False)
             check_qrcode_signals = self.network_pool.start_task(
-                xhsAPI.G(self.factory.make_cookies()).qrcode_status,
+                xhs.API().set_cookies(self.factory.make_cookies()).qrcode_status,
                 self.login_qrcode.qr_id, self.login_qrcode.code
             )
             check_qrcode_signals.success.connect(self.on_check_qrcode_success)
@@ -101,7 +101,7 @@ class CreateUser(QtWidgets.QDialog):
                 cookies = self.factory.make_cookies(session)
                 user_id = response['data']['login_info']['user_id']
                 self.ui.label_user_id.setText(user_id)
-                get_user_info = xhsAPI.G(cookies).user_me()
+                get_user_info = xhs.API().set_cookies(cookies).user_me()
                 logger.debug(f'获取账号个人信息：{get_user_info}')
                 if get_user_info.get('data'):
                     nickname = get_user_info['data'].get('nickname', '获取昵称失败')

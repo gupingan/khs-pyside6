@@ -9,12 +9,11 @@ from enum import Enum, auto
 from os import PathLike
 from pathlib import PurePath
 
-import xhsAPI
+import xhs
 import toml
 import requests
 from win32api import RegOpenKey, RegQueryValueEx
 from win32con import HKEY_LOCAL_MACHINE, KEY_READ
-from obscuror import obscuror
 from qrcode.main import QRCode
 from qrcode.constants import ERROR_CORRECT_L
 from loguru import logger
@@ -466,6 +465,7 @@ class Tasker(QtCore.QObject):
     ):
         super().__init__(parent=parent)
         self.user = user
+        self.api = xhs.API().set_cookies(user.string_cookies)
         self.config = config.copy()
         self.task_count = task_count
         self.work_notes = []
@@ -558,7 +558,7 @@ class Tasker(QtCore.QObject):
 
     def check_user_login(self):
         result = -1
-        response = xhsAPI.G(self.user.string_cookies).user_me()
+        response = self.api.user_me()
         code = response.get('code')
 
         if code == -100:
@@ -614,12 +614,12 @@ class Tasker(QtCore.QObject):
                 self.parent().check_paused()
                 self.parent().check_stop()
 
-                response = xhsAPI.P(self.user.string_cookies).search_note(
+                response = self.api.search_note(
                     ' '.join(keywords),
                     page + 1,
                     20,
-                    xhsAPI.SortMethod[sort_method],
-                    xhsAPI.NoteType[note_type]
+                    xhs.SORT_TYPE[sort_method],
+                    xhs.NOTE_TYPE[note_type]
                 )
                 if response['code'] == -100:
                     self.user.available = 0
@@ -687,7 +687,7 @@ class Tasker(QtCore.QObject):
             self.parent().check_paused()
             self.parent().check_stop()
 
-            response = xhsAPI.P(self.user.string_cookies).homefeed(num=60)
+            response = self.api.homefeed(num=60)
             try:
                 if response['code'] != 0:
                     if response['code'] == -100:
@@ -742,7 +742,7 @@ class Tasker(QtCore.QObject):
 
         try:
             if self.config.is_fav_no_comment or (self.config.is_check_block and self.config.is_skip_over_comment):
-                note_feed = xhsAPI.P(self.user.string_cookies).note_feed(note.id)
+                note_feed = self.api.note_feed(note.id)
                 logger.debug(f'获取笔记详情：{note.id} - {note_feed}')
                 if not note_feed['success']:
                     if note_feed['code'] == -100:
@@ -789,7 +789,7 @@ class Tasker(QtCore.QObject):
                 comment, real_at_users = self._get_comment()
 
             logger.debug(f'执行评论的参数：{note.id}, {comment}, {real_at_users}')
-            response = xhsAPI.P(self.user.string_cookies).post_comment(note.id, comment, real_at_users)
+            response = self.api.comment_post(note.id, comment, real_at_users)
             logger.debug(f'评论后的响应：{note.id} - {response}')
 
             self.parent().check_paused()
@@ -885,9 +885,8 @@ class Tasker(QtCore.QObject):
     def _get_comment(self):
         self.parent().check_paused()
         self.parent().check_stop()
-        raw_comment_obj: Comment = random.choice(self.config.comments)
-        comment_obj = obscuror(raw_comment_obj.content, self.config.uncommon_char_count, self.config.uncommon_char_mode)
-        return raw_comment_obj.result(comment_obj.result), raw_comment_obj.real_at_users
+        comment_obj: Comment = random.choice(self.config.comments)
+        return comment_obj.result(comment_obj.content), comment_obj.real_at_users
 
     def _check_comment_state(self, note: Union[NormalNote], comment_id: Union[str], cursor: Union[str] = ""):
         self.parent().check_paused()
@@ -908,7 +907,7 @@ class Tasker(QtCore.QObject):
         self.parent().check_stop()
 
         user_link = string.create_link(self.user.home_page, self.user.name, 12)
-        response = xhsAPI.G(self.user.string_cookies).show_comments(note.id, cursor, comment_id)
+        response = self.api.show_comments(note.id, cursor, comment_id)
         logger.debug(f'查看评论内容：{response}')
         if not response['success']:
             if response['code'] == -100:
@@ -934,7 +933,7 @@ class Tasker(QtCore.QObject):
         self.parent().check_stop()
 
         contents = ['嗯...[害羞R]', '对的[害羞R]', '[害羞R][害羞R]666', '[害羞R]那也这样吧']
-        response = xhsAPI.P(linked_user.string_cookies).post_comment(
+        response = xhs.API().set_cookies(linked_user.string_cookies).comment_post(
             note.id, random.choice(contents), target_comment_id=comment_id
         )
         logger.debug(f'联动检查屏蔽，返回响应：{response}')
@@ -942,7 +941,7 @@ class Tasker(QtCore.QObject):
         try:
             if response['code'] == 0:
                 child_comment_id = response['data']['comment']['id']
-                xhsAPI.P(linked_user.string_cookies).delete_comment(note.id, child_comment_id)
+                xhs.API().set_cookies(linked_user.string_cookies).comment_delete(note.id, child_comment_id)
                 return '可见'
             elif response['code'] == 10001:
                 # 禁言的，但是评论是存在的
@@ -969,7 +968,7 @@ class Tasker(QtCore.QObject):
         for _ in range(3):
             try:
                 self.parent().msleep(985)
-                response = xhsAPI.P(self.user.string_cookies).collect_note(note.id)
+                response = self.api.collect_note(note.id)
                 logger.debug(f'收藏笔记({_ + 1})：{note.id} - {response}')
 
                 if response['success'] and response['msg'] == '成功':

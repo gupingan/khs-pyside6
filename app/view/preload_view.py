@@ -1,4 +1,4 @@
-from app.lib import QtCore, QtWidgets, QtGui
+from app.lib import QtCore, QtWidgets
 from app.lib.globals import app_name, version_name, version_number
 from app.lib.threads import PreloadThread
 from app.ui import preload_view_ui

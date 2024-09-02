@@ -1,6 +1,6 @@
 import re
 import sys
-import xhsAPI
+import xhs
 from app.lib import QtWidgets, QtCore, QtGui
 from app.lib.core import TomlBase, Unit, UnitState, BackupConfig
 from app.lib.globals import settings, app_name, threads, IMAGES_DIR, JS_FILE, Path
@@ -196,7 +196,7 @@ class MainWindow(QtWidgets.QMainWindow):
         :return:
         """
         # 必须加载的（需要该包以及js文件请联系我的邮箱）
-        xhsAPI.init_context(path=JS_FILE)
+        xhs.init_context(path=JS_FILE)
 
         self.update_info_thread = UpdateInfoThread(parent=self)
         self.update_info_thread.send.connect(self.on_unit_info_send)
