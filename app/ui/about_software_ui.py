@@ -127,7 +127,7 @@ class Ui_AboutSoftware(object):
         self.appName.setText(QCoreApplication.translate("AboutSoftware", u"\u8bb8\u66f0\u70e4\u7ea2\u85af", None))
         self.label_3.setText(QCoreApplication.translate("AboutSoftware", u"\u7248\u672c:", None))
         self.appVersionName.setText(QCoreApplication.translate("AboutSoftware", u"\u65e0\u6cd5\u83b7\u53d6\u7248\u672c", None))
-        self.label_4.setText(QCoreApplication.translate("AboutSoftware", u"Xu Yue\u00a92024-2025", None))
+        self.label_4.setText(QCoreApplication.translate("AboutSoftware", u"Gu Pingan\u00a92024-2025", None))
         self.disclaim.setText(QCoreApplication.translate("AboutSoftware", u"<html><head/><body><p><span style=\" text-decoration: underline;\">\u514d\u8d23\u58f0\u660e</span></p></body></html>", None))
     # retranslateUi
 
