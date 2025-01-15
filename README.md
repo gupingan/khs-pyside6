@@ -1,6 +1,6 @@
 ## 项目：烤红薯开源版
 
-> 关于 `y-xhs` 包，已经不再免费共享，具体请查看：[关于 Donate](https://github.com/gupingan/khs-pyside6/issues/20)
+> 关于 `y-xhs` 包，已经不再免费共享，具体请查看：[关于 Donate](https://github.com/gupingan/khs-pyside6/issues/24)
 
 该项目是基于 `PySide6` 和 `y-xhs` 所开发的某红薯自动化评论工具，可放心食用。
 
